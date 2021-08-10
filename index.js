@@ -2,12 +2,15 @@ const express = require("express");
 const app = express();
 const database = require("./config/database.js");
 
-
-// Generate ngrok URL, fetch database, app listen
+// generate ngrok URL, fetch database, app listen
 database.connectDatabase(app);
-database.generateNgrokURL();
+// database.generateNgrokURL();
 console.log("...waiting for database connection...");
 
-app.get("/", (req, res) => {
-    res.send("<h1>Job Listing App<h1>");
-  });
+// import and use body parser
+app.use(express.json());
+
+// import routes
+const jobRoutes = require("./src/routes/job");
+
+app.use("/", jobRoutes);
