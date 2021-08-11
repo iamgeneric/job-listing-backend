@@ -2,7 +2,7 @@
 
 ## Set environment variables as follows:
 - Create a file titled ".env" in the root folder
-- Enter the information below as is
+- Enter the information PORT and DB_URL below on separate lines
 - Run npm install in your terminal to get all the dependencies
 
 
