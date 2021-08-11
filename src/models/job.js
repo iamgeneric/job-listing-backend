@@ -14,6 +14,11 @@ const jobSchema = new Schema({
     max: 1000,
     trim: true,
   },
+  content:{
+    type:String,
+    required: true,
+    max: 5000,
+  },
   location: {
     type: String,
     default: "",
