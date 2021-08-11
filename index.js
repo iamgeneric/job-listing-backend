@@ -12,5 +12,4 @@ app.use(express.json());
 
 // import routes
 const jobRoutes = require("./src/routes/job");
-
 app.use("/", jobRoutes);

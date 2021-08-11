@@ -14,10 +14,18 @@ const jobSchema = new Schema({
     max: 1000,
     trim: true,
   },
+  location: {
+    type: String,
+    default: "",
+  },
+  keyword: {
+    type: String,
+    default: "",
+  },
   datePosted: {
     type: Date,
     default: Date.now,
   },
-})
+});
 
 module.exports = mongoose.model("Job", jobSchema);
