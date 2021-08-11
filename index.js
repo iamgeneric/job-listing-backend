@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const database = require("./config/database");
+const database = require("./config/database.js");
 
 // generate ngrok URL, fetch database, app listen
 database.connectDatabase(app);

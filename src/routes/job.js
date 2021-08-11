@@ -14,7 +14,7 @@ router.get("/", browseJobPosts);
 // protected routes
 router.post("/", createJobPost);
 router.get("/:id", findJobPost);
-router.put("/:id", updateJobPost);
-router.delete("/:id", deleteJobPost);
+// router.put("/:id", updateJobPost);
+// router.delete("/:id", deleteJobPost);
 
 module.exports = router;
