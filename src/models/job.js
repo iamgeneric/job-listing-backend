@@ -18,6 +18,7 @@ const jobSchema = new Schema({
     type:String,
     required: true,
     max: 5000,
+    default: ""
   },
   location: {
     type: String,
