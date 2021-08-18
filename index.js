@@ -12,4 +12,6 @@ app.use(express.json());
 
 // import routes
 const jobRoutes = require("./src/routes/job");
+
+app.get("/", (req, res) => res.json("Job Listing App"));
 app.use("/", jobRoutes);
