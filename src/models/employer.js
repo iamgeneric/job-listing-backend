@@ -8,26 +8,40 @@ const employerSchema = new Schema({
     max: 255,
     trim: true,
   },
-  coporateEmail: {
+  email: {
     type: String,
     required: true,
     max: 255,
     trim: true,
   },
-
-  companyLocation: {
+  location: {
     type: String,
     required: true,
     max: 255,
     trim: true,
   },
-  coporateAdresss: {
+  address: {
     type: String,
     required: true,
     max: 255,
     trim: true,
   },
-  employer: { type: mongoose.Schema.Types.ObjectId, ref: "Employer" },
+  phoneNo: {
+    type: String,
+    required: true,
+    max: 20,
+    trim: true,
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 6,
+    maxlength: 128,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("Employer", employerSchema);

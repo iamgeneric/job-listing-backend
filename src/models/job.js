@@ -11,18 +11,35 @@ const jobSchema = new Schema({
   description: {
     type: String,
     required: true,
-    max: 1000,
+    max: 5000,
     trim: true,
   },
-  content:{
-    type:String,
+  category: {
+    type: String,
     required: true,
-    max: 5000,
-    default: ""
+    max: 100,
+    trim: true,
   },
   location: {
     type: String,
     default: "",
+  },
+  objectives: {
+    type: String,
+    required: true,
+    max: 5000,
+    trim: true,
+  },
+  skillsRequired: {
+    type: String,
+    required: true,
+    max: 1000,
+  },
+  knowledgeRequired: {
+    type: String,
+    required: true,
+    max: 5000,
+    trim: true,
   },
   keyword: {
     type: String,
