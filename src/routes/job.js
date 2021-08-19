@@ -1,9 +1,10 @@
 const router = require("express").Router();
 
+const uploadResume = require("../utils/multer");
 const createJobPost = require("../controllers/job/createJobPost");
 const deleteJobPost = require("../controllers/job/deleteJobPost");
 const browseJobPosts = require("../controllers/job/browseJobs");
-const selectJobPost = require("../controllers/job/selectJobPost")
+const selectJobPost = require("../controllers/job/selectJobPost");
 const updateJobPost = require("../controllers/job/updateJobPost");
 const searchJobPosts = require("../controllers/job/searchJobPost");
 const applyForjob = require("../controllers/job/applyForJob");
@@ -12,7 +13,7 @@ const applyForjob = require("../controllers/job/applyForJob");
 router.get("/", browseJobPosts);
 router.get("/query", searchJobPosts); // location or keyword
 router.get("/:id", selectJobPost);
-router.post("/apply/:id", applyForjob);
+router.post("/apply/:id", uploadResume, applyForjob);
 
 // protected routes
 router.post("admin/", createJobPost);

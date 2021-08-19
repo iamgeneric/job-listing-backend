@@ -26,8 +26,19 @@ const applyForJob = async (req, res) => {
     if (applicationExists)
       return res.json({ msg: "You have already applied!" });
 
+    // If no resume uploaded, otherwise return resume link
+    if (req.file == undefined)
+      return res
+        .status(200)
+        .json({ status: "failed", msg: "Please attach resume!" });
+    const resumeURI = `https://deltajob-ng.herokuapp.com/uploads/resume/${req.file.filename}`;
+
     // save new job application
-    const application = new Application({ ...req.body, jobId });
+    const application = new Application({
+      ...req.body,
+      jobId,
+      resume: resumeURI,
+    });
     await application.save();
 
     res.status(201).json({

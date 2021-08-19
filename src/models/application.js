@@ -76,12 +76,12 @@ const applicationSchema = new Schema({
   //   required: true,
   //   trim: true,
   // },
-  // resume: {
-  //   type: String,
-  //   max: 255,
-  //   required: true,
-  //   trim: true,
-  // },
+  resume: {
+    type: String,
+    max: 255,
+    required: true,
+    trim: true,
+  },
   applicationDate: {
     type: Date,
     default: Date.now,

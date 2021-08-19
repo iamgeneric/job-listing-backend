@@ -5,7 +5,7 @@ const { passwordChangeValidation } = require("../../models/employer");
 // Fetch Current Employer Details
 const currentEmployerDetails = async (req, res) => {
   try {
-    const employer = await Employer.findById(req.user.id);
+    const employer = await Employer.findById(req.employer.id);
     res.json(employer);
   } catch (err) {
     console.log(err);
@@ -15,7 +15,7 @@ const currentEmployerDetails = async (req, res) => {
 // Update Account Information
 const updateEmployerInfo = async (req, res) => {
   try {
-    let employer = await Employer.findById(req.user.id);
+    let employer = await Employer.findById(req.employer.id);
 
     // Limit employer info changes via this route to only the following
     const { companyName, location, address, phoneNo } = req.body;
@@ -41,7 +41,7 @@ const changePassword = async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   // Check if employer old password is correct
-  let employer = await Employer.findById(req.user.id);
+  let employer = await Employer.findById(req.employer.id);
   const validPassword = await bcrypt.compare(
     req.body.oldPassword,
     employer.password

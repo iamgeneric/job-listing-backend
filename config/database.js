@@ -25,10 +25,3 @@ exports.connectDatabase = async (app) => {
     console.log(error);
   }
 };
-
-// // Setup ngrok URL generator
-// const ngrok = require("ngrok");
-// exports.generateNgrokURL = async function () {
-//   const url = await ngrok.connect(process.env.PORT);
-//   console.log(url);
-// };

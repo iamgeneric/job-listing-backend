@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const cors = require("cors")
+const cors = require("cors");
 const database = require("./config/database.js");
 
 // fetch database, app listen
@@ -11,8 +11,6 @@ console.log("...waiting for database connection...");
 app.use(express.json());
 app.use(cors());
 
-// import routes
+// import routes and set base route
 const jobRoutes = require("./src/routes/job");
-
-app.get("/jobs", (req, res) => res.json("Job Listing App"));
 app.use("/", jobRoutes);
