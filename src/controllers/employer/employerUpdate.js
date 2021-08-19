@@ -1,9 +1,9 @@
 const Employer = require("../../models/employer");
 const bcrypt = require("bcryptjs");
-const { passwordChangeValidation } = require("../../models/employer");
+const employerValidation = require("../../models/employer");
 
 // Fetch Current Employer Details
-const currentEmployerDetails = async (req, res) => {
+exports.getAccountInfo = async (req, res) => {
   try {
     const employer = await Employer.findById(req.employer.id);
     res.json(employer);
@@ -13,7 +13,7 @@ const currentEmployerDetails = async (req, res) => {
 };
 
 // Update Account Information
-const updateEmployerInfo = async (req, res) => {
+exports.editAccountInfo = async (req, res) => {
   try {
     let employer = await Employer.findById(req.employer.id);
 
@@ -35,9 +35,9 @@ const updateEmployerInfo = async (req, res) => {
 };
 
 // Change Account Password
-const changePassword = async (req, res) => {
+exports.changePassword = async (req, res) => {
   // validate request body
-  const { error } = passwordChangeValidation(req.body);
+  const { error } = employerValidation.passwordChange(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   // Check if employer old password is correct
@@ -63,5 +63,3 @@ const changePassword = async (req, res) => {
     employer,
   });
 };
-
-module.exports = { currentEmployerDetails, updateEmployerInfo, changePassword };

@@ -13,4 +13,6 @@ app.use(cors());
 
 // import routes and set base route
 const jobRoutes = require("./src/routes/job");
+const employerRoutes = require("./src/routes/employer");
 app.use("/", jobRoutes);
+app.use("/", employerRoutes);

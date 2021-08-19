@@ -1,7 +1,7 @@
 const Joi = require("joi");
 
 // =-=-=-=-=-= Employer Sign-Up Validation =-=-=-=-=-=
-const employerSignUpValidation = (employer) => {
+exports.signUp = (employer) => {
   const schema = Joi.object({
     companyName: Joi.string().min(2).max(255).required(),
     email: Joi.string().min(6).max(255).required().email(),
@@ -16,7 +16,7 @@ const employerSignUpValidation = (employer) => {
 };
 
 // =-=-=-=-=-= Employer Sign-In Validation =-=-=-=-=-=
-const employerSignInValidation = (employer) => {
+exports.signIn = (employer) => {
   const schema = Joi.object({
     email: Joi.string().min(6).required().email(),
     password: Joi.string().min(6).required(),
@@ -26,7 +26,7 @@ const employerSignInValidation = (employer) => {
 };
 
 // =-=-=-=-=-= Employer Password Change Validation =-=-=-=-=-=
-const passwordChangeValidation = (employer) => {
+exports.passwordChange = (employer) => {
   const schema = Joi.object({
     oldPassword: Joi.string().min(6).max(255).required(),
     newPassword: Joi.string().min(6).max(255).required(),
@@ -34,10 +34,4 @@ const passwordChangeValidation = (employer) => {
   }).unknown();
 
   return schema.validate(employer);
-};
-
-module.exports = {
-  employerSignUpValidation,
-  employerSignInValidation,
-  passwordChangeValidation,
 };

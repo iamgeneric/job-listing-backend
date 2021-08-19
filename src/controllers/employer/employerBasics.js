@@ -1,16 +1,13 @@
 const Employer = require("../../models/employer");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const {
-  employerSignUpValidation,
-  employerSignInValidation,
-} = require("../validations/User");
+const employerValidation = require("../../validations/employer");
 
-// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= EMPLOYER SIGN-UP =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-const employerSignUp = async (req, res) => {
+// EMPLOYER SIGN-UP =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+exports.signUp = async (req, res) => {
   try {
     // validate before creating new employer account
-    const { error } = employerSignUpValidation(req.body);
+    const { error } = employerValidation.signUp(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
     // Check if account already exists in database
@@ -18,10 +15,10 @@ const employerSignUp = async (req, res) => {
     if (emailExist)
       return res
         .status(400)
-        .json({ success: false, msg: "Email already exists." });
+        .json({ success: false, msg: "Email already exists!" });
 
     if (req.body.password !== req.body.confirmPassword) {
-      return res.json({ success: false, msg: "Password does not match." });
+      return res.json({ success: false, msg: "Password does not match!" });
     }
 
     // Hash passwords
@@ -43,16 +40,18 @@ const employerSignUp = async (req, res) => {
   }
 };
 
-// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= EMPLOYER SIGN-IN =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-const employerSignIn = async (req, res) => {
+// EMPLOYER SIGN-IN =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+exports.signIn = async (req, res) => {
   // validate the entered user data
-  const { error } = employerSignInValidation(req.body);
+  const { error } = employerValidation.signIn(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   // Check if employer account exists in database
   const employer = await Employer.findOne({ email: req.body.email });
   if (!employer)
-    return res.status(400).json({ success: false, msg: "Invalid Email." });
+    return res
+      .status(400)
+      .json({ success: false, msg: "Invalid email or password." });
 
   // Check if password is correct
   const validPassword = await bcrypt.compare(
@@ -60,7 +59,9 @@ const employerSignIn = async (req, res) => {
     employer.password
   );
   if (!validPassword)
-    return res.status(400).json({ success: false, msg: "Invalid Password." });
+    return res
+      .status(400)
+      .json({ success: false, msg: "Invalid email or password." });
 
   // Create a token
   const token = jwt.sign({ id: employer._id }, process.env.JWT_SECRET);
@@ -73,12 +74,10 @@ const employerSignIn = async (req, res) => {
   });
 };
 
-// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= LOG OUT =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-const logOut = (req, res) => {
+// LOG OUT =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+exports.logOut = (req, res) => {
   return res
     .clearCookie("auth_token")
     .status(200)
     .json({ success: true, msg: "Successfully logged out!" });
 };
-
-module.exports = { employerSignUp, employerSignIn, logOut };
