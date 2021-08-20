@@ -11,7 +11,7 @@ console.log("...waiting for database connection...");
 // body parser, cors
 app.use(express.json());
 app.use(cookieParser()); // Use cookies to set access token
-app.use(cors());
+// app.use(cors());
 // app.use(express.urlencoded({ extended: true }));
 // app.use("/uploads/resume", express.static("public/uploads/resume"));
 
