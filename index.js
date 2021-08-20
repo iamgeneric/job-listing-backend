@@ -11,12 +11,12 @@ console.log("...waiting for database connection...");
 // body parser, cors
 app.use(express.json());
 app.use(cookieParser()); // Use cookies to set access token
-// app.use(cors());
+app.use(cors());
 // app.use(express.urlencoded({ extended: true }));
 // app.use("/uploads/resume", express.static("public/uploads/resume"));
 
 // // Import Authorization Middleware
-// const authorize = require("./src/middlewares/authorize");
+const authorize = require("./src/middlewares/authorize");
 
 // import routes
 const jobBasicRoutes = require("./src/routes/jobBasic");
@@ -26,4 +26,4 @@ const employerAdminRoutes = require("./src/routes/employerAdmin");
 // Set base routes
 app.use("/", jobBasicRoutes);
 app.use("/employer", employerBasicRoutes);
-app.use("/employer", employerAdminRoutes);
+app.use("/employer", authorize, employerAdminRoutes);
