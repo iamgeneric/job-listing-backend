@@ -33,7 +33,7 @@ const jobSchema = new Schema({
   skillsRequired: {
     type: String,
     required: true,
-    max: 1000,
+    max: 5000,
   },
   knowledgeRequired: {
     type: String,
