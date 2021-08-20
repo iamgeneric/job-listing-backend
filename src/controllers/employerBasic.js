@@ -1,7 +1,7 @@
-const Employer = require("../../models/employer");
+const Employer = require("../models/employer");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const employerValidation = require("../../validations/employer");
+const employerValidation = require("../validations/employer");
 
 // EMPLOYER SIGN-UP =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 exports.signUp = async (req, res) => {

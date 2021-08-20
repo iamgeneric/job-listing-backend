@@ -1,6 +1,6 @@
-const Employer = require("../../models/employer");
+const Employer = require("../models/employer");
 const bcrypt = require("bcryptjs");
-const employerValidation = require("../../models/employer");
+const employerValidation = require("../validations/employer");
 
 // Fetch Current Employer Details
 exports.getAccountInfo = async (req, res) => {

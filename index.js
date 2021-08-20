@@ -15,8 +15,15 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads/resume", express.static("public/uploads/resume"));
 
-// import routes and set base route
-const jobRoutes = require("./src/routes/job");
-const employerRoutes = require("./src/routes/employer");
-app.use("/listing", jobRoutes);
-app.use("/employer", employerRoutes);
+// Import Authorization Middleware
+const authorize = require("./src/middlewares/authorize");
+
+// import routes
+const jobBasicsRoutes = require("./src/routes/jobBasic");
+const employerBasicRoutes = require("./src/routes/employerBasic");
+const employerAdminRoutes = require("./src/routes/employerAdmin");
+
+// Set base routes
+app.use("/", jobBasicsRoutes);
+app.use("/employer", employerBasicRoutes);
+app.use("/employer", authorize.protect, employerAdminRoutes);

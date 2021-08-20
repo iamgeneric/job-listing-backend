@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const authorize = (req, res, next) => {
+exports.protect = (req, res, next) => {
   const token = req.cookies.auth_token;
   if (!token)
     return res
@@ -15,5 +15,3 @@ const authorize = (req, res, next) => {
   }
   next();
 };
-
-module.exports = authorize;
