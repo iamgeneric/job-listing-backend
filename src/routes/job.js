@@ -12,6 +12,4 @@ router.get("/query", searchJobPosts); // location or keyword
 router.get("/:id", selectJobPost);
 router.post("/apply/:id", uploadResume, applyForjob);
 
-
-
 module.exports = router;

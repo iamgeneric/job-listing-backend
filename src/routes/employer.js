@@ -15,7 +15,7 @@ router.post("/signup", employerBasics.signUp);
 router.post("/signin", employerBasics.signIn);
 router.get("/logout", employerBasics.logOut);
 
-// protected job post CRUD routes
+// Protected job post CRUD routes
 router.post("/job/create", authorize, createJobPost);
 router.put("/job/update/:id", authorize, updateJobPost);
 router.delete("/job/delete/:id", authorize, deleteJobPost);

@@ -12,8 +12,8 @@ console.log("...waiting for database connection...");
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser()); // Use cookies to set access token
-app.use(express.urlencoded({ extended: true }));
-app.use("/uploads/resume", express.static("public/uploads/resume"));
+// app.use(express.urlencoded({ extended: true }));
+// app.use("/uploads/resume", express.static("public/uploads/resume"));
 
 // import routes and set base route
 const jobRoutes = require("./src/routes/job");
