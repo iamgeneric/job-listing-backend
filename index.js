@@ -18,6 +18,8 @@ app.use("/uploads/resume", express.static("public/uploads/resume"));
 // import routes and set base route
 const jobRoutes = require("./src/routes/job");
 const employerRoutes = require("./src/routes/employer");
-app.get("/", (res) => res.send("Hello"));
-app.use("/", jobRoutes);
-app.use("/", employerRoutes);
+app.get("/", (req, res) => {
+  res.send("Hello");
+});
+app.use("/listing", jobRoutes);
+app.use("/employer", employerRoutes);
