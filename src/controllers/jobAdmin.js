@@ -10,9 +10,10 @@ exports.createJobPost = async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
 
     // save new job post
-    const job = new Job({ 
-      ...req.body, 
-      employer: req.employer.id });
+    const job = new Job({
+      ...req.body,
+      employer: req.employer.id,
+    });
     await job.save();
 
     res.status(201).json({ status: "success", msg: "New job posted.", job });
@@ -39,7 +40,9 @@ exports.getEmployerJobPosts = async (req, res) => {
 // Get All Applications to Job Post Created by Signed-In Employer
 exports.getApplicationsForEmployer = async (req, res) => {
   try {
-    const applications = await Application.find({ employerId: req.employer.id });
+    const applications = await Application.find({
+      employer: req.employer.id,
+    });
     if (applications.length === 0)
       return res
         .status(200)
@@ -94,12 +97,25 @@ exports.updateJobPost = async (req, res) => {
       });
 
     // Limit job post changes via this route to only the following
-    const { title, description, location, keyword } = req.body;
+    const {
+      title,
+      description,
+      category,
+      location,
+      keyword,
+      objectives,
+      skillsRequired,
+      knowledgeRequired,
+    } = req.body;
 
     // User can update or leave out any of these fields
     if (title) job.title = title;
     if (description) job.description = description;
+    if (category) job.category = category;
     if (location) job.location = location;
+    if (objectives) job.objectives = objectives;
+    if (skillsRequired) job.skillsRequired = skillsRequired;
+    if (knowledgeRequired) job.knowledgeRequired = knowledgeRequired;
     if (keyword) job.keyword = keyword;
     await job.save();
 
