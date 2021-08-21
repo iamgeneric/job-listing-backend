@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const authorize = (req, res, next) => {
   const token = req.cookies.auth_token;
