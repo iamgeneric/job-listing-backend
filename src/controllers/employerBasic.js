@@ -2,6 +2,7 @@ const Employer = require("../models/employer");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const employerValidation = require("../validations/employer");
+require("dotenv").config(); // Setup Environment Variables
 
 // Setup Environment Variables
 require("dotenv").config();

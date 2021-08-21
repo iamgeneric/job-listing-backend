@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
-// Setup Environment Variables
-require("dotenv").config();
+require("dotenv").config(); // Setup Environment Variables
 const PORT = process.env.PORT || 3000;
 
 // Setup Database

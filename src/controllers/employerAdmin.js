@@ -1,7 +1,6 @@
 const Employer = require("../models/employer");
 const bcrypt = require("bcryptjs");
 const employerValidation = require("../validations/employer");
-require("dotenv").config();
 
 // Fetch Current Employer Details
 exports.getAccountInfo = async (req, res) => {
