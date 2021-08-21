@@ -26,4 +26,4 @@ const employerAdminRoutes = require("./src/routes/employerAdmin");
 // Set base routes
 app.use("/", jobBasicRoutes);
 app.use("/account", employerBasicRoutes);
-app.use("/employer", authorize, employerAdminRoutes);
+app.use("/employer", employerAdminRoutes);
