@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser");
 const database = require("./config/database.js");
 
 // Import Authorization Middleware
-const authorize = require("./src/middlewares/authorize");
+const authorize = require("./src/controllers/authorize");
 
 // fetch database, app listen
 database.connectDatabase(app);
