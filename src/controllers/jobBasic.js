@@ -21,9 +21,10 @@ exports.browseJobPosts = async (req, res) => {
 exports.searchJobPosts = async (req, res) => {
   try {
     // Search for job posts using keyword
-    // localhost:4000/query?keyword=Engineering
+    // e.g., localhost:4000/query?keyword=Engineering
     if (req.query.keyword) {
-      const jobs = await Job.find({ keyword: `${req.query.keyword}` });
+      const jobs = await Job.find({ 
+        keyword: `${req.query.keyword.trim()}` });
       if (jobs.length === 0)
         return res.status(200).json({
           status: "success",
@@ -33,9 +34,10 @@ exports.searchJobPosts = async (req, res) => {
     }
 
     // Search for job posts using location
-    // localhost:4000/query?location=Asaba
+    // e.g., localhost:4000/query?location=Asaba
     if (req.query.location) {
-      const jobs = await Job.find({ location: `${req.query.location}` });
+      const jobs = await Job.find({ 
+        location: `${req.query.location.trim()}` });
       if (jobs.length === 0)
         return res.status(200).json({
           status: "success",

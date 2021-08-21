@@ -10,8 +10,9 @@ exports.createJobPost = async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
 
     // save new job post
-    const employerId = req.employer.id;
-    const job = new Job({ ...req.body, employerId });
+    const job = new Job({ 
+      ...req.body, 
+      employer: req.employer.id });
     await job.save();
 
     res.status(201).json({ status: "success", msg: "New job posted.", job });
@@ -23,7 +24,7 @@ exports.createJobPost = async (req, res) => {
 // Get All Job Posts Created by Signed-In Employer
 exports.getEmployerJobPosts = async (req, res) => {
   try {
-    const jobs = await Job.find({ employerId: req.employer.id });
+    const jobs = await Job.find({ employer: req.employer.id });
     if (jobs.length === 0)
       return res
         .status(200)

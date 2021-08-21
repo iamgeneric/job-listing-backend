@@ -45,10 +45,9 @@ const jobSchema = new Schema({
     type: String,
     default: "",
   },
-  employerId: {
-    type: String,
-    required: true,
-    trim: true,
+  employer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Employer",
   },
   datePosted: {
     type: Date,

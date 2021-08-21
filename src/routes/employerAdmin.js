@@ -6,7 +6,7 @@ const jobAdmin = require("../controllers/jobAdmin");
 
 // Protected job post CRUD routes
 router.get("/job", jobAdmin.getEmployerJobPosts);
-router.get("/job", jobAdmin.getApplicationsForEmployer);
+router.get("/applications", jobAdmin.getApplicationsForEmployer);
 router.post("/job/create", jobAdmin.createJobPost);
 router.put("/job/update/:id", jobAdmin.updateJobPost);
 router.delete("/job/delete/:id", jobAdmin.deleteJobPost);
