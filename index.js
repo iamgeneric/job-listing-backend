@@ -4,6 +4,9 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const database = require("./config/database.js");
 
+// Setup Environment Variables
+require("dotenv").config();
+
 // fetch database, app listen
 database.connectDatabase(app);
 console.log("...waiting for database connection...");

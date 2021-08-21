@@ -3,6 +3,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const employerValidation = require("../validations/employer");
 
+// Setup Environment Variables
+require("dotenv").config();
+
 // EMPLOYER SIGN-UP =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 exports.signUp = async (req, res) => {
   try {
