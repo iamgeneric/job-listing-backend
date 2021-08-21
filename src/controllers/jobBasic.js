@@ -23,8 +23,9 @@ exports.searchJobPosts = async (req, res) => {
     // Search for job posts using keyword
     // e.g., localhost:4000/query?keyword=Engineering
     if (req.query.keyword) {
-      const jobs = await Job.find({ 
-        keyword: `${req.query.keyword.trim()}` });
+      const jobs = await Job.find({
+        keyword: `${req.query.keyword.trim()}`,
+      });
       if (jobs.length === 0)
         return res.status(200).json({
           status: "success",
@@ -36,8 +37,9 @@ exports.searchJobPosts = async (req, res) => {
     // Search for job posts using location
     // e.g., localhost:4000/query?location=Asaba
     if (req.query.location) {
-      const jobs = await Job.find({ 
-        location: `${req.query.location.trim()}` });
+      const jobs = await Job.find({
+        location: `${req.query.location.trim()}`,
+      });
       if (jobs.length === 0)
         return res.status(200).json({
           status: "success",
@@ -75,8 +77,8 @@ exports.applyForJob = async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
 
     // fetch job id
-    const job = await Job.findById(req.params.id);
-    if (!job)
+    const jobExists = await Job.findById(req.params.id);
+    if (!jobExists)
       return res.status(404).json({
         status: "failed",
         msg: `Job not found!`,
@@ -86,7 +88,7 @@ exports.applyForJob = async (req, res) => {
     let jobId = req.params.id;
     let applicationExists = await Application.findOne({
       email: req.body.email,
-      jobId,
+      job: jobId,
     });
     if (applicationExists)
       return res.json({ msg: "You have already applied!" });
@@ -101,7 +103,8 @@ exports.applyForJob = async (req, res) => {
     // save new job application
     const application = new Application({
       ...req.body,
-      jobId,
+      job: jobId,
+      employer: jobExists.employer,
       resume: resumeURI,
     });
     await application.save();
@@ -112,7 +115,6 @@ exports.applyForJob = async (req, res) => {
       application,
     });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 };
