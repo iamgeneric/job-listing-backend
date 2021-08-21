@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 exports.connectDatabase = async (app) => {
   try {
     await mongoose.connect(
-      process.env.DB_URL,
+      process.env.DB_URI,
       {
         useUnifiedTopology: true,
         useNewUrlParser: true,
