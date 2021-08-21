@@ -7,28 +7,28 @@ const database = require("./config/database.js");
 // Import Authorization Middleware
 const authorize = require("./src/middlewares/authorize");
 
-// fetch database, app listen
+// Fetch database, app listen
 database.connectDatabase(app);
 console.log("...waiting for database connection...");
 
-// body parser, cors
+// Body parser, cors
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser()); // Use cookies to set access token
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads/resume", express.static("public/uploads/resume"));
 
-// import routes
+// Import routes
 const jobBasicRoutes = require("./src/routes/jobBasic");
 const employerBasicRoutes = require("./src/routes/employerBasic");
 const employerAdminRoutes = require("./src/routes/employerAdmin");
 
-// Landing page
+// Set test page
 app.get("/", (req, res) => {
   res.send("<h1>Job Listing App<h1>");
 });
 
 // Set base routes
-app.use("/jobs", jobBasicRoutes);
+app.use("/jobs", jobBasicRoutes); 
 app.use("/account", employerBasicRoutes);
 app.use("/employer", authorize, employerAdminRoutes);
