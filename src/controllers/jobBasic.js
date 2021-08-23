@@ -5,7 +5,7 @@ const applicationValidation = require("../validations/application");
 // Get All Job Posts
 exports.browseJobPosts = async (req, res) => {
   try {
-    const jobs = await Job.find();
+    const jobs = await Job.find().populate("employer", "companyName");
     if (jobs.length === 0)
       return res
         .status(200)
@@ -25,11 +25,11 @@ exports.searchJobPosts = async (req, res) => {
     if (req.query.keyword) {
       const jobs = await Job.find({
         keyword: `${req.query.keyword.trim()}`,
-      });
+      }).populate("employer", "companyName");
       if (jobs.length === 0)
         return res.status(200).json({
           status: "success",
-          msg: `there are no job posts with ${req.query.keyword}!`,
+          msg: `There are no job posts with ${req.query.keyword}!`,
         });
       res.json(jobs);
     }
@@ -39,11 +39,11 @@ exports.searchJobPosts = async (req, res) => {
     if (req.query.location) {
       const jobs = await Job.find({
         location: `${req.query.location.trim()}`,
-      });
+      }).populate("employer", "companyName");
       if (jobs.length === 0)
         return res.status(200).json({
           status: "success",
-          msg: `there are no job posts for ${req.query.location}!`,
+          msg: `There are no job posts for ${req.query.location}!`,
         });
       res.json(jobs);
     }
@@ -56,7 +56,7 @@ exports.searchJobPosts = async (req, res) => {
 // Select Specific Job Post
 exports.selectJobPost = async (req, res) => {
   try {
-    const job = await Job.findById(req.params.id);
+    const job = await Job.findOne({_id: req.params.id}).populate("employer", "companyName");
     if (!job)
       return res.status(404).json({
         status: "failed",
